@@ -1,0 +1,60 @@
+
+import stanford.karel.*;
+
+public class CheckerboardKarel extends SuperKarel {
+
+	public void run() {
+		if (frontIsBlocked()) {
+			turnLeft();
+			while(frontIsClear()) {
+			oddRow();
+			}
+		} else {
+		while(frontIsClear()) {
+		oddRow();
+		if(frontIsClear() || rightIsClear()) {
+			passage();
+			evenRow();
+			if(frontIsClear() || rightIsClear()) {
+			passage();
+				}
+			}
+		}
+	}
+}
+	private void oddRow() {
+		putBeeper();
+		move();
+		while(frontIsClear()) {
+			move();
+			putBeeper();
+			if(frontIsClear()) {
+			move(); }
+			}
+		turnAround();
+		while(frontIsClear()) {
+			move();
+		}
+}
+	private void passage() {
+		turnRight();
+		move();
+		turnLeft();
+		turnAround();
+		}
+	private void evenRow() {
+		move();
+		putBeeper();
+		while(frontIsClear()) {
+			move();
+			if(frontIsClear()) {
+			move();
+			putBeeper(); 
+				}
+			}
+		turnAround();
+		while(frontIsClear()) {
+			move();
+		}
+	}
+}
